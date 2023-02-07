@@ -1,7 +1,7 @@
-const authRouter=require('./auth/auth.router')
-const noteRouter=require('./note/note.router')
+import authRouter from './auth/auth.router'
+import noteRouter from './note/note.router'
 
-module.exports={
+export default{
     authRouter,
     noteRouter,
     
