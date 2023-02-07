@@ -13,7 +13,7 @@ app.use(helmet());
 app.use(express.json())
 app.use(cors())
 
-const port =process.env.PORT||5000 ;
+const port =process.env.PORT ;
 
 mongoose.set('strictQuery', true)
 connect();
