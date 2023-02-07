@@ -1,5 +1,5 @@
-require("dotenv").config();
 const  mongoose  = require("mongoose");
+require("dotenv").config();
 
 var cors = require('cors')
 const helmet = require("helmet");
