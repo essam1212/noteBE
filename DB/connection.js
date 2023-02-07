@@ -1,6 +1,6 @@
-const mongoose = require("mongoose")
+import { connect as _connect } from "mongoose";
 const connect = async () => {
-    return mongoose.connect(process.env.DB_CONNECTION2).then((res) => {
+    return _connect(process.env.DB_CONNECTION2).then((res) => {
         console.log('DB connect');
     }).catch((err) => {
         console.log("DB err",err);
@@ -8,7 +8,7 @@ const connect = async () => {
 }
 
 
-module.exports = connect
+export default connect
 
 
 

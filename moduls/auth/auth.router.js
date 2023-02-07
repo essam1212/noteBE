@@ -1,8 +1,12 @@
-const router=require('express').Router()
-const validation=require('../../midlwear/validation')
-const {signUpValidation, loginValidation}=require('./auth.validation')
-const {signUp, login} = require('./controllar/form')
+import { Router } from "express";
+
+import validation from '../../midlwear/validation.js'
+import { signUpValidation, loginValidation } from './auth.validation.js'
+import { signUp, login } from './controllar/form.js'
+const router=Router()
+
 router.post('/signup',validation(signUpValidation),signUp)
+
 router.post('/login',validation(loginValidation),login)
 
-module.exports=router
+export default router

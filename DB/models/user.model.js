@@ -1,8 +1,8 @@
-const mongoose = require("mongoose");
-const bcrypt = require('bcrypt');
+import { Schema, model } from "mongoose";
+import { hashSync } from 'bcrypt';
 
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   userName: {
     type: String,
     required: true,
@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
     enums: ["Male", "Female"],
     default:"Male"
   },
-  notes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Note" }],
+  notes: [{ type: Schema.Types.ObjectId, ref: "Note" }],
 
   isBlocked: Boolean,
    }, {
@@ -31,9 +31,9 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.pre("save", async function (next) {
-  this.password = await bcrypt.hashSync(this.password,parseInt(process.env.saltRounds))
+  this.password = await hashSync(this.password,parseInt(process.env.saltRounds))
 })
-const userModel = mongoose.model("User", userSchema);
+const userModel = model("User", userSchema);
 
 
-module.exports = userModel;
+export default userModel;

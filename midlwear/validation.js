@@ -7,19 +7,19 @@ const validation = (schema) => {
             if (schema[kay]) {
                 const validationResult = schema[kay].validate(req[kay], { abortEarly: false })
                 if (validationResult.error) {
-                    validationError.push(validationResult.error.details)
+                    return validationError.push(validationResult.error.details)
                 }
 
             }
         })
         if (validationError.length) {
-            res.status(400).json({ message: 'Validation error', validationError })
+            return res.status(400).json({ message: 'Validation error', validationError })
 
 
         } else {
-            next()
+            return next()
         }
     }
 }
 
- module.exports = validation
+ export default validation

@@ -1,20 +1,17 @@
-const Joi=require('joi')
-const signUpValidation={
-    body:Joi.object().required().keys({
-        userName: Joi.string().pattern(new RegExp(/^[A-Za-z]{3,8}/)).required(),
-        email: Joi.string().email().required(),
-        password: Joi.string().pattern(new RegExp(/^[A-Za-z1-9]{3,8}/)).required(),
-        cpassword: Joi.string().valid(Joi.ref('password')).required(),
+import joi from 'joi'
+
+export const signUpValidation={
+    body:joi.object().required().keys({
+        userName:joi.string().pattern(new RegExp(/^[A-Za-z]{3,8}/)).required(),
+        email:joi.string().email().required(),
+        password:joi.string().pattern(new RegExp(/^[A-Za-z1-9]{3,8}/)).required(),
+        cpassword:joi.string().valid(joi.ref('password')).required(),
     })
 }
-const loginValidation={
-    body:Joi.object().required().keys({
-        email: Joi.string().email().required(),
-        password: Joi.string().pattern(new RegExp(/^[A-Za-z1-9]{3,8}/)).required(),
+export const loginValidation={
+    body:joi.object().required().keys({
+        email:joi.string().email().required(),
+        password:joi.string().pattern(new RegExp(/^[A-Za-z1-9]{3,8}/)).required(),
        
     })
-}
-module.exports={
-    signUpValidation ,
-    loginValidation
 }

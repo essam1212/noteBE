@@ -1,6 +1,9 @@
-const router=require('express').Router()
-const { addnote, editNote, deleteNote, gitNote, profile } = require('./controllar/note.controllar')
-const auth=require('../../midlwear/auth')
+import { Router } from "express";
+
+import { addnote, editNote, deleteNote, gitNote, profile } from './controllar/note.controllar.js'
+
+import auth from '../../midlwear/auth.js'
+const router=Router()
 
 router.post('/addNote',auth(),addnote)
 router.patch('/editNote/:_id',auth(),editNote)
@@ -9,4 +12,4 @@ router.get('/:id',gitNote)
 router.get('/',auth(),profile)
 
 
-module.exports=router
+export default router

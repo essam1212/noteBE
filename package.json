@@ -2,15 +2,15 @@
   "name": "notes",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "type": "module",
-
   "scripts": {
-    "start": "node app.js"
+    "start": "node index.js",
+    "dev":"nodemon index.js"
   },
   "engines": {
     "node": "18.13.0"
-  },
+  }, 
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -23,6 +23,7 @@
     "joi": "^17.7.0",
     "jsonwebtoken": "^9.0.0",
     "mongodb": "^4.13.0",
-    "mongoose": "^6.9.0"
+    "mongoose": "^6.9.0",
+    "morgan": "^1.10.0"
   }
 }

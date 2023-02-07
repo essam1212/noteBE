@@ -1,43 +1,43 @@
 
-const noteModel=require ('../../../DB/models/note.model')
-const userModel=require ('../../../DB/models/user.model')
+import noteModel from '../../../DB/models/note.model.js'
+import userModel from '../../../DB/models/user.model.js'
 
-const addnote=async(req,res)=>{
+export const addnote=async(req,res)=>{
     try {
         const {type ,desc}=req.body
         const newNote=new noteModel({type,desc,createdBy:req.user})
         const saveNote=await newNote.save()
         const saveNoteToUser = await userModel.findByIdAndUpdate(req.user, { $push: { notes: saveNote._id } }, { new: true })
-        res.status(200).json({ message: "Done", saveNote })
+        return res.status(200).json({ message: "Done", saveNote })
         
         } 
  catch (error) {
-        res.status(400).json({ message: "catch error", error })
+    return res.status(400).json({ message: "catch error", error })
         
     }
 }
 // -----------------------
-const editNote = async (req, res) => {
+export const editNote = async (req, res) => {
     try {
         const { type,desc } = req.body
         const { _id } = req.params
         const update = await noteModel.findByIdAndUpdate({_id}, {type,desc}, { new: true })
-        res.status(201).json({ message: "Done", update })
+        return res.status(201).json({ message: "Done", update })
     } catch (error) {
-        res.status(400).json({ message: "catch error", error })
+        return res.status(400).json({ message: "catch error", error })
 
     }
 
 }
-const deleteNote = async (req, res) => {
+export const deleteNote = async (req, res) => {
     try {
         const { _id } = req.params
         const deleteNoteFromeUser = await userModel.findByIdAndUpdate(req.user, { $pull: { notes:_id } }, { new: true })
 
         const deletenota = await noteModel.findByIdAndDelete(_id)
-        res.status(201).json({ message: "Done" })
+        return res.status(201).json({ message: "Done" })
     } catch (error) {
-        res.status(400).json({ message: "catch error", error })
+        return res.status(400).json({ message: "catch error", error })
 
     }
 
@@ -46,35 +46,35 @@ const deleteNote = async (req, res) => {
 }
 
 // ================================
-const gitNote=async(req,res)=>{
+export const gitNote=async(req,res)=>{
     
     try {  
         const {id}=req.params
-const mynote=await noteModel.findById(id,{},{new:true})
+const mynote= await noteModel.findById(id,{},{new:true})
 if (mynote) {
-    res.json({message:"done",mynote})    
+    return res.json({message:"done",mynote})    
 
 } else {
-    res.json({message:"in-valid id"})    
+    return res.json({message:"in-valid id"})    
   
 }
 } catch (error) {
-    res.status(400).json({ message: "catch error", error })
+    return res.status(400).json({ message: "catch error", error })
 
 }
 }
 // ============================
-const profile=async(req,res)=>{
+export const profile=async(req,res)=>{
     try {  
  const user= await userModel.findOne({_id: req.user}).populate("notes")
 console.log(user);
-res.json({message:"done",user})    
+return res.json({message:"done",user})    
 } catch (error) {
-    res.status(400).json({ message: "catch error", error })
+    return res.status(400).json({ message: "catch error", error })
 
 }
 }
-module.exports={
+export default{
     addnote,
     editNote,
     deleteNote,

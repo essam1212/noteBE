@@ -1,28 +1,28 @@
-var jwt = require('jsonwebtoken');
-const userModle = require('../DB/models/user.model');
+import { verify } from 'jsonwebtoken';
+import userModle from '../DB/models/user.model.js';
 
 const auth=()=>{
     return async(req,res,next)=>{
         try {
             const headerToken = req.headers['authorization']
             if (!headerToken || headerToken == null || headerToken == undefined || !headerToken.startsWith(`Bearer `)) {
-                res.status(401).json({ message: "invaled-header token" })
+              return res.status(401).json({ message: "invaled-header token" })
     
             } else {
                 const token=headerToken.split(" ")[1]
-                const decoded=jwt.verify(token,process.env.salt)
+                const decoded=verify(token,process.env.salt)
                 const userData=await userModle.findById(decoded.id)
                 
                 req.user=userData.id
                 console.log(req.user);
-                next()
+                return next()
             
             } 
         } catch (error) {
-            res.json({ message: "catch error" })
+            return res.json({ message: "catch error" })
   
         }
 
     }
 }
-module.exports=auth
+export  default auth
