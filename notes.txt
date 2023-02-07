@@ -1,0 +1,14 @@
+Back end
+1-api login 
+2-api sign up
+3-api profile 
+4-api add note 
+5-api delete note
+6-api edit note
+
+front end 
+
+1-login page
+2- sign up page 
+3-profile page ( button (edit ,delete)+ button (see more)+ovar flow hidden فيها كل نوت في مربع عباره عن عنوان وموضوع وكل المربعات اد بعض ولو الموضوع كبير عن المربع اعمله )
+4- note detels  
