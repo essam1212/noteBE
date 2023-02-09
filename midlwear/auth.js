@@ -14,7 +14,6 @@ const auth=()=>{
                 const userData=await userModle.findById(decoded.id)
                 
                 req.user=userData.id
-                console.log(req.user);
                 return next()
             
             } 

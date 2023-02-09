@@ -7,9 +7,16 @@ export const signUp = async (req, res) => {
     try {
 
         const { userName, email, password,cpassword } = req.body;
-        const newUser = new userModle({ userName, email, password })
-        const saveUser = await newUser.save()
-        return res.json({ message: "Added" ,saveUser});
+        const finduser = await userModle.findOne({ email })
+        if (finduser) {
+            return res.json({ message: "user is exist" })
+    
+        } else {
+            const newUser = new userModle({ userName, email, password })
+            const saveUser = await newUser.save()
+            return res.json({ message: "Added" ,saveUser});
+        }
+        
     } catch (error) {
         return res.json({ message: "error", error });
 
