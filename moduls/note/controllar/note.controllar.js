@@ -4,8 +4,8 @@ import userModel from '../../../DB/models/user.model.js'
 
 export const addnote=async(req,res)=>{
     try {
-        const {type ,desc}=req.body
-        const newNote=new noteModel({type,desc,createdBy:req.user})
+        const {title ,desc}=req.body
+        const newNote=new noteModel({title,desc,createdBy:req.user})
         const saveNote=await newNote.save()
         const saveNoteToUser = await userModel.findByIdAndUpdate(req.user, { $push: { notes: saveNote._id } }, { new: true })
         return res.status(200).json({ message: "Done", saveNote })
@@ -19,9 +19,9 @@ export const addnote=async(req,res)=>{
 // -----------------------
 export const editNote = async (req, res) => {
     try {
-        const { type,desc } = req.body
+        const { title,desc } = req.body
         const { _id } = req.params
-        const update = await noteModel.findByIdAndUpdate({_id}, {type,desc}, { new: true })
+        const update = await noteModel.findByIdAndUpdate({_id}, {title,desc}, { new: true })
         return res.status(201).json({ message: "Done", update })
     } catch (error) {
         return res.status(400).json({ message: "catch error", error })
