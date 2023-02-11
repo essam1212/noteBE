@@ -8,7 +8,7 @@ export const addnote=async(req,res)=>{
         const newNote=new noteModel({title,desc,createdBy:req.user})
         const saveNote=await newNote.save()
         const saveNoteToUser = await userModel.findByIdAndUpdate(req.user, { $push: { notes: saveNote._id } }, { new: true })
-        return res.status(200).json({ message: "Done", saveNote })
+        return res.status(200).json([{ message: "Done", saveNote }])
         
         } 
  catch (error) {
